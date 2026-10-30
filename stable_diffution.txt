@@ -1,0 +1,33 @@
+Instalar dependencias del sistema
+sudo apt update
+sudo apt install -y build-essential cmake git curl
+
+. Clonar el repositorio
+
+git clone --recursive  https://github.com/leejet/stable-diffusion.cpp.git
+cd stable-diffusion.cpp
+
+actualizar
+git pull origin master
+git submodule init
+git submodule update
+
+
+3. Compilar el proyecto (Solo CPU)
+
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+
+decargar modelo compatible
+
+mkdir -p ../models
+cd ../models
+curl -L -O https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
+cd ../build
+
+
+ Generar una imagen
+ ./bin/sd -m ../models/sd-v1-4.ckpt -p "A fantasy castle in the mountains" -o output.png
+
